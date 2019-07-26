@@ -1,0 +1,7 @@
+{
+  "name": "PRCEU",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular"
+}

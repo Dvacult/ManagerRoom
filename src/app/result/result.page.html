@@ -1,0 +1,63 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Resultado da busca por salas</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+      <ion-refresher-content></ion-refresher-content>
+    </ion-refresher>
+
+    <ion-card class="dates-card" *ngIf="dates.length == 0">
+        <ion-card-header>
+          <ion-card-title>Nenhuma sala encontrada</ion-card-title>
+        </ion-card-header>
+      
+        <ion-card-content>
+          <p>Nenhuma sala disponivel para as datas {{dates}}.</p>
+          <p>Por favor, procure em outras datas ou entre em contato com o PRCEU</p>
+        </ion-card-content>
+    </ion-card>
+    
+    <ion-list class="result-list" *ngIf="dates.length > 0">
+      <ion-item-divider *ngIf="dates.length > 1">
+        <ion-label>
+          <h2>Datas selecionadas {{dates}} no horários {{hours}}</h2>
+        </ion-label>
+        <ion-label slot="end" class="text-result">
+            <h2>{{rooms.length}} resultados</h2>
+        </ion-label>
+      </ion-item-divider>
+
+      <ion-item-divider *ngIf="dates.length == 1">
+        <ion-label slot="start">
+          <h2>Data selecionada {{dates}}</h2>
+        </ion-label>
+        <ion-label slot="end"  class="text-result">
+          <h2>{{rooms.length}} resultados</h2>
+        </ion-label>
+      </ion-item-divider>
+
+      <ion-item-sliding *ngFor="let item of rooms, let i = index">
+       
+        <ion-item>
+          <ion-thumbnail slot="start">
+            <img src="../../assets/imgs/{{item.attributes.imgID}}.jpg" class="img-room"/>
+          </ion-thumbnail> 
+          <ion-label>        
+              <h1>{{item.attributes.name}}</h1>
+              <p>
+                  Área <b>{{item.attributes.area}}</b> com dimensões <b>{{item.attributes.dimension}}</b>
+              </p>
+          </ion-label>
+          <ion-button fill="solid" slot="end" color="success" (click)="presentAlertConfirm(item)">Reservar</ion-button>
+          <ion-button fill="solid" slot="end" (click)="presentModal(item)">Detalhes</ion-button>
+        </ion-item>
+        
+      </ion-item-sliding>
+    </ion-list>
+</ion-content>

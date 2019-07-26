@@ -1,0 +1,57 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>
+      Configurações
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <ion-card class="login-card">
+        <img class="logo" src="../../assets/imgs/logo_prceu.png">
+        <ion-card-content>
+            <ion-list>
+                <ion-item-divider>
+                    <ion-label>
+                      Contato
+                    </ion-label>
+                </ion-item-divider>
+                <ion-item>
+                    <ion-label>
+                        <p>E-mail</p>
+                        <h2>{{email}}</h2>
+                      </ion-label>
+                </ion-item>
+                <ion-item>
+                    <ion-label>
+                      <p>Número USP</p>
+                      <h2>{{nUSP}}</h2>
+                    </ion-label>
+                </ion-item> 
+                <ion-item>
+                    <ion-label>
+                      <p>Setor</p>
+                      <h2>{{setor}}</h2>
+                    </ion-label>
+                </ion-item> 
+                
+                <ion-item-divider>
+                    <ion-label>
+                      Configurações
+                    </ion-label>
+                </ion-item-divider>
+                <ion-item>
+                    <ion-avatar slot="start">
+                      <img src="../../assets/imgs/user.png">
+                    </ion-avatar>
+                    <ion-label>
+                      {{login}}
+                    </ion-label>
+                    <!-- <ion-button fill="outline" slot="end" (click)="editUser()">Editar</ion-button> -->
+                    <ion-button fill="outline" slot="end" (click)="logout()" color="danger">Logout</ion-button>
+                  </ion-item>
+              </ion-list>
+                      
+        </ion-card-content>
+      </ion-card>
+</ion-content>
