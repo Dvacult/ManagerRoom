@@ -7,7 +7,8 @@ const routes: Routes = [
   { path: '', loadChildren: './tabs/tabs.module#TabsPageModule' },
   { path: 'result', loadChildren: './result/result.module#ResultPageModule' },
   { path: 'edit-user', loadChildren: './edit-user/edit-user.module#EditUserPageModule' },
-  { path: 'viewer-room', loadChildren: './viewer-room/viewer-room.module#ViewerRoomPageModule' }
+  { path: 'viewer-room', loadChildren: './viewer-room/viewer-room.module#ViewerRoomPageModule' },  { path: 'request', loadChildren: './request/request.module#RequestPageModule' }
+
 ];
 @NgModule({
   imports: [

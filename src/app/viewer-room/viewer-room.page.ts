@@ -1,7 +1,6 @@
 import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { AlertController } from '@ionic/angular';
 import { ModalController } from '@ionic/angular';
-import {IonSlides} from '@ionic/angular';
 
 @Component({
   selector: 'app-viewer-room',
@@ -25,7 +24,7 @@ export class ViewerRoomPage implements OnInit {
     this.images = this.room.attributes.slidesID
   }
 
-  reserve(room){
+  request(room){
     this.modalCtrl.dismiss(room);
   }
 

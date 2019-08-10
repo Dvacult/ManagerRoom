@@ -54,8 +54,8 @@
                   Área <b>{{item.attributes.area}}</b> com dimensões <b>{{item.attributes.dimension}}</b>
               </p>
           </ion-label>
-          <ion-button fill="solid" slot="end" color="success" (click)="presentAlertConfirm(item)">Reservar</ion-button>
-          <ion-button fill="solid" slot="end" (click)="presentModal(item)">Detalhes</ion-button>
+          <ion-button fill="solid" slot="end" color="success" (click)="presentRequest(item)">Solicitar</ion-button>
+          <ion-button fill="solid" slot="end" (click)="presentViewer(item)">Detalhes</ion-button>
         </ion-item>
         
       </ion-item-sliding>

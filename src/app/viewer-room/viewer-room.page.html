@@ -13,7 +13,7 @@
       <p>{{room.attributes.description}}</p>      
     </ion-card-content>
     
-    <ion-button fill="solid" expand="full" color="success" (click)="reserve(room)">Reservar</ion-button>
+    <ion-button fill="solid" expand="full" color="success" (click)="request(room)">Solicitar</ion-button>
     
     <ion-slides #slides pager="true" autoplay="true" [options]="slideOpts">
         <ion-slide *ngFor="let item of images, let i = index">

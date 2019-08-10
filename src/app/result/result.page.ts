@@ -8,6 +8,7 @@ import { LoadingController } from '@ionic/angular';
 import { AlertController } from '@ionic/angular';
 import { ModalController } from '@ionic/angular';
 import { ViewerRoomPage } from '../viewer-room/viewer-room.page';
+import { RequestPage } from '../request/request.page';
 
 @Component({
   selector: 'app-result',
@@ -41,9 +42,25 @@ export class ResultPage implements OnInit {
   ngOnInit() {    
   }
   
-  async presentModal(item) {
+  async presentViewer(item) {
     const modal = await this.modalController.create({
       component: ViewerRoomPage,
+      componentProps: { room: item },
+      cssClass:"my-modal"
+    });
+
+    modal.onDidDismiss()
+      .then((data) => {
+        const room = data['data'];
+        this.presentRequest(room)
+    });
+    
+    return await modal.present();      
+  }
+  
+  async presentRequest(item) {
+    const modal = await this.modalController.create({
+      component: RequestPage,
       componentProps: { room: item },
       cssClass:"my-modal"
     });
@@ -55,7 +72,7 @@ export class ResultPage implements OnInit {
     });
     
     return await modal.present();      
-  }  
+  } 
 
   getRoom() {
 
@@ -127,14 +144,14 @@ export class ResultPage implements OnInit {
     }, 2000);
   }
 
-  setReserve(room){
+  setRequest(room){
 
     this.storage.get('user').then((user) => {
       console.log('User ', user);
       
       Parse.initialize(ParseConfig.appId, ParseConfig.javascriptKey, ParseConfig.masterKey);
       Parse.serverURL = ParseConfig.serverURL;      
-      var Reverse = Parse.Object.extend("Reverse");
+      var Reverse = Parse.Object.extend("Requests");
       var rev = new Reverse();
       rev.set("roomRev", this.getRoomParse(room));
       rev.set("userRev", this.getUser(user.id));
@@ -144,8 +161,8 @@ export class ResultPage implements OnInit {
       rev.save().then((revSave) => {
         console.log(revSave);
 
-        room.set("datesRev", this.getDatesRev(room));
-        room.set("intervalsRev", this.getIntervalsRev(room));
+        room.set("datesReq", this.getDatesRev(room));
+        room.set("intervalsReq", this.getIntervalsRev(room));
         room.save().then((roomUpdate) => {
           console.log(roomUpdate);
           this.presentAlert(room)
@@ -225,8 +242,8 @@ export class ResultPage implements OnInit {
 
   async presentAlert(room) {
     const alert = await this.alertController.create({
-      header: 'Reversa da Sala',
-      message: 'Confirmada a reserva da sala: <p><strong>'+ room.attributes.name,
+      header: 'Solicatição de reserva',
+      message: 'Confirmada a solicitação de reserva da sala: <p><strong>'+ room.attributes.name,
       buttons: ['OK']
     });
 
@@ -235,8 +252,8 @@ export class ResultPage implements OnInit {
 
   async presentAlertConfirm(room) {
     const alert = await this.alertController.create({
-      header: 'Reserva de sala!',
-      message: 'Confirma a reserva da sala: <p><strong>'+ room.attributes.name +'</strong></p><p>Em '+ this.dates +'</p>',
+      header: 'Solicatição de reserva!',
+      message: 'Confirma a solicitação de reserva da sala: <p><strong>'+ room.attributes.name +'</strong></p><p>Em '+ this.dates +'</p>',
       buttons: [
         {
           text: 'Cancelar',
@@ -246,11 +263,11 @@ export class ResultPage implements OnInit {
             console.log('Confirm Cancel: blah');
           }
         }, {
-          text: 'Reserve',
+          text: 'Solicitar',
           cssClass: 'danger',
           handler: () => {
             console.log('Confirm Okay');
-            this.setReserve(room);
+            this.setRequest(room);
           }
         }
       ]
@@ -261,7 +278,7 @@ export class ResultPage implements OnInit {
 
   parseInterval(){
     let hours = [];
-    debugger;
+
     for(var i = 0; i < this.intervals.length; i++)
     {
       switch(this.intervals[i]){

@@ -11,10 +11,11 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
 import { ViewerRoomPage } from './viewer-room/viewer-room.page';
+import { RequestPage } from './request/request.page';
 
 @NgModule({
-  declarations: [AppComponent, ViewerRoomPage],
-  entryComponents: [ViewerRoomPage],
+  declarations: [AppComponent, ViewerRoomPage,RequestPage],
+  entryComponents: [ViewerRoomPage,RequestPage],
   imports: [BrowserModule, IonicModule.forRoot(), IonicStorageModule.forRoot(), AppRoutingModule],
   providers: [
     StatusBar,
