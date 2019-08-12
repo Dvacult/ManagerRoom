@@ -5,51 +5,53 @@
 </ion-header>
 
 <ion-content>
-  <ion-list class="details">
-    
-      <ion-list-header>
-          Informações sobre a Sala 
-      </ion-list-header>
+  <form>
+    <ion-list class="details">
+      <ion-item color="medium">
+        <ion-label>Informações sobre a Sala</ion-label>
+      </ion-item>
       <ion-item>
-      <ion-label>
+        <ion-label>
           <p>Área <b>{{room.attributes.area}}</b></p>
           <p>Dimensões <b>{{room.attributes.dimension}}</b></p>
-      </ion-label>
-    </ion-item>
-    <ion-item>
+        </ion-label>
+      </ion-item>
+      <ion-item>
         <ion-label position="floating">Unidade/Instituto/órgão solicitante</ion-label>
-        <ion-input></ion-input>
-    </ion-item>
-    <ion-item>
+        <ion-input (ionChange)="handleValue($event, 'requester')" clearInput required></ion-input>
+      </ion-item>
+      <ion-item>
         <ion-label position="floating">Titulo o Evento</ion-label>
-        <ion-input></ion-input>
-    </ion-item>
-    <ion-list-header>
-        <ion-icon name="people"></ion-icon>Responsáveis pelo evento 
-    </ion-list-header>
-    <ion-item>
+        <ion-input (ionChange)="handleValue($event, 'titleEvent')" clearInput required></ion-input>
+      </ion-item>
+
+      <ion-item color="medium">
+        <ion-label>Responsáveis pelo evento</ion-label>
+      </ion-item>
+      <ion-item>
         <ion-label position="floating">Docente</ion-label>
-        <ion-input></ion-input>
-    </ion-item>
-    <ion-item>
+        <ion-input (ionChange)="handleValue($event, 'teacher')" clearInput required></ion-input>
+      </ion-item>
+      <ion-item>
         <ion-label position="floating">Servidor</ion-label>
-        <ion-input></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label>Categoria</ion-label>
-      <ion-select interface="popover">
-        <ion-select-option value="palestra">Palestra</ion-select-option>
-        <ion-select-option value="simposio">Simpósio</ion-select-option>
-        <ion-select-option value="seminario">Seminário</ion-select-option>
-        <ion-select-option value="curso">Curso</ion-select-option>
-        <ion-select-option value="congresso">Congresso</ion-select-option>
-        <ion-select-option value="reuniao">Reunião</ion-select-option>
-      </ion-select>
-    </ion-item>    
-    <ion-radio-group>
-        <ion-list-header>
-          <ion-label>Natureza</ion-label>
-        </ion-list-header>
+        <ion-input (ionChange)="handleValue($event, 'publicWorker')" clearInput required></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Categoria</ion-label>
+        <ion-select interface="popover" (ionChange)="handleValue($event, 'category')" required>
+          <ion-select-option value="palestra">Palestra</ion-select-option>
+          <ion-select-option value="simposio">Simpósio</ion-select-option>
+          <ion-select-option value="seminario">Seminário</ion-select-option>
+          <ion-select-option value="curso">Curso</ion-select-option>
+          <ion-select-option value="congresso">Congresso</ion-select-option>
+          <ion-select-option value="reuniao">Reunião</ion-select-option>
+        </ion-select>
+      </ion-item>
+      <ion-radio-group (ionChange)="handleValue($event, 'nature')" required>
+        <ion-item color="medium">
+          <ion-label>Natureza do evento</ion-label>
+        </ion-item>
         <ion-item>
           <ion-label>Pago</ion-label>
           <ion-radio slot="start" color="success" value="apple"></ion-radio>
@@ -59,21 +61,22 @@
           <ion-label>Gratuito</ion-label>
           <ion-radio slot="start" color="tertiary" value="grape" checked></ion-radio>
         </ion-item>
-    </ion-radio-group>
-    <ion-item>
+      </ion-radio-group>
+      <ion-item>
         <ion-label position="floating">Detalhamento da proposta</ion-label>
-        <ion-input></ion-input>
-    </ion-item>
-    <ion-item>
+        <ion-input type="url" (ionChange)="handleValue($event, 'proposal')" required></ion-input>
+      </ion-item>
+      <ion-item>
         <ion-label position="floating">Publico Estimado</ion-label>
-        <ion-input type="number"></ion-input>
-    </ion-item>
-    <ion-item>
+        <ion-input type="number" (ionChange)="handleValue($event, 'estimatedPublic')"></ion-input>
+      </ion-item>
+      <ion-item>
         <ion-label position="floating">Contatos</ion-label>
-        <ion-input type="email"></ion-input>
-    </ion-item>
+        <ion-input type="email" (ionChange)="handleValue($event, 'contacts')"></ion-input>
+      </ion-item>
 
-    <ion-button fill="solid" expand="full" color="success" (click)="request(room)">Solicitar</ion-button>
-    
-  </ion-list> 
+      <ion-button fill="solid" expand="full" color="success" (click)="sendRequest()">Solicitar</ion-button>
+
+    </ion-list>
+  </form>
 </ion-content>

@@ -145,10 +145,10 @@ export class ResultPage implements OnInit {
   }
 
   setRequest(room){
-
+    let request = room.request;
     this.storage.get('user').then((user) => {
       console.log('User ', user);
-      
+      debugger;
       Parse.initialize(ParseConfig.appId, ParseConfig.javascriptKey, ParseConfig.masterKey);
       Parse.serverURL = ParseConfig.serverURL;      
       var Reverse = Parse.Object.extend("Requests");
@@ -158,6 +158,17 @@ export class ResultPage implements OnInit {
       rev.set("datesRev", this.dates);
       rev.set("intervalsRev", this.intervals);
       console.log(room);
+      // Solicitação
+      rev.set("requester", request.requester);
+      rev.set("titleEvent", request.titleEvent);
+      rev.set("teacher", request.teacher);
+      rev.set("publicWorker", request.publicWorker);
+      rev.set("category", request.category);
+      rev.set("nature", request.nature);
+      rev.set("proposal", request.proposal);
+      rev.set("estimatedPublic", request.estimatedPublic);      
+      rev.set("contacts", request.contacts);  
+      
       rev.save().then((revSave) => {
         console.log(revSave);
 
