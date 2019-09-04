@@ -17,7 +17,6 @@ export class RequestPage implements OnInit {
 
   sendRequest() {
     this.room.request = this.request;
-    debugger;
     this.modalCtrl.dismiss(this.room);
   }
 
